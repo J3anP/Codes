@@ -1,20 +1,21 @@
 import socket
-
+import time
 
 if __name__ == '__main__':
     sock_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     
-    sock_s.bind(('0.0.0.0',5001))
+    sock_s.bind(('127.0.0.1',5001))
     
     print("Buscando cliente")
     sock_s.listen(1)
     
     while True:
+        time.sleep(0.5)
+        conn, client_addr = sock_s.accept()
+        print("Conectado")
         try:
-            conn, client_addr = sock_s.accept()
-            print("Conectado")
+            
             while True:
-                sock_s.settimeout(0.1)
                 contenido_nuevo = ""
                 data = conn.recv(1024)
                 if data: 
@@ -27,13 +28,13 @@ if __name__ == '__main__':
                     
                     with open("pacientes.csv", "w+") as f:
                         f.write(contenido)
-                else:
-                    print("No se ingresaron más datos")
-                    break
-    
+                        
+                    print("Guardando datos")
+                
         except ConnectionResetError:
             print("El cliente ha cerrado la conexión de manera abrupta")
         except KeyboardInterrupt:
             break
         finally:
             conn.close()
+    sock_s.close()
