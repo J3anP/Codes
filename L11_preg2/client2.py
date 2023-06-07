@@ -11,28 +11,22 @@ if __name__ == '__main__':
     try:
         print("Ingrese datos del paciente")
         Nombre = input("Nombre(s): ")
-        time.sleep(0.1)
         Apellidos = input("Apellidos: ")
-        time.sleep(0.1)
         Peso = input("Peso(kg): ")
-        time.sleep(0.1)
         Talla = input("Talla(cm): ")
-        time.sleep(0.1)
         Edad = input("Edad: ")
-        time.sleep(0.1)
         Seguro = input("¿Cuenta con seguro? (s/n): ")
         if Seguro.lower=="s":
             Seguro = "True"
         if Seguro.lower=="n":
             Seguro = "False"
-        time.sleep(0.1)
         
         datos = [Nombre, Apellidos, Peso, Talla, Edad, Seguro]
         
         msg = ",".join(datos)
         sock_c.sendall(msg.encode("utf-8"))
         
-        time.sleep(1.5)
+        time.sleep(1)
         print("Enviando al servidor...")
     except KeyboardInterrupt:
         sys.exit()  
