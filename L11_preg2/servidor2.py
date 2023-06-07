@@ -20,7 +20,6 @@ if __name__ == '__main__':
                 data = conn.recv(1024)
                 if data: 
                     data = data.decode("utf-8")
-                    data = data +"\n"
                     contenido_nuevo += f"{data}"
                     with open("pacientes.csv","r") as f:
                         contenido = f.read()
