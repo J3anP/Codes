@@ -6,7 +6,7 @@ if __name__ == '__main__':
     
     print(f"Conectando a 172.0.0.1: 5001")
     
-    sock_c.connect(("192.168.72.1",5001))
+    sock_c.connect(("127.0.0.1",5001))
     datos = []
     try:
         print("Ingrese datos del paciente")
@@ -21,9 +21,9 @@ if __name__ == '__main__':
         Edad = input("Edad: ")
         time.sleep(0.1)
         Seguro = input("¿Cuenta con seguro? (s/n): ")
-        if Seguro.lower == "s":
+        if Seguro.lower=="s":
             Seguro = "True"
-        else:
+        if Seguro.lower=="n":
             Seguro = "False"
         time.sleep(0.1)
         
@@ -32,9 +32,8 @@ if __name__ == '__main__':
         msg = ",".join(datos)
         sock_c.sendall(msg.encode("utf-8"))
         
-        time.sleep(2)
+        time.sleep(1.5)
         print("Enviando al servidor...")
     except KeyboardInterrupt:
-        sys.close()  
-    finally:
-        sock_c.close()
+        sys.exit()  
+    
